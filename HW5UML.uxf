@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1090</x>
+      <y>350</y>
+      <w>400</w>
+      <h>490</h>
+    </coordinates>
+    <panel_attributes>Connect4GUI
+--
+-boardSize:int
+-numToWin:int
+-bufferHeight:int
+-boardImageWidth:int
+-chipImageWidth:int
+-gridSize:int
+-sceneWidth:int
+-sceneHeight:int
+-timer:AnimationTimer
+-gamePieces:ArrayList&lt;GUIGamePiece&gt;
+-gameGrid:Arraylist&lt;GUIGameGrid&gt;
+-dynamicMembers:Pane
+-presenter:Connect4Presenter
+-isPlayer1:boolean
+-animating:boolean
+-wasAnimating:boolean
+-gameOver:boolean
+-winPane:StackPane
+--
++init():void
++attachPresenter(_presenter:Connect4Presenter):void
++Win(i:int,j:int,_isPlayer1:boolean):void
++start(stage:Stage):void
+-CreateNewGamePiece():void
+-drawBoard(staticMembers:Pane):void
+-resetBoard():void
++runGame():void
++handleClick(xLocation:int):void
++launchApp(args:String[]):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>570</y>
+      <w>380</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Connect4Piece
+--
+-isP1:boolean
+-i:int
+-j:int
+--
++&lt;&lt;constructor&gt;&gt;Connect4Piece(_i:int,_j:int,_isP1:boolean)
++isP1():boolean
++getI():int
++getJ():int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>50</y>
+      <w>410</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Connect4Presenter
+--
+-GUI:Connect4GUI
+-board:Connect4Board
+-ImageWidth:int
+-boardSize:int
+--
++&lt;&lt;constructor&gt;&gt;Connect4Presenter(_boardSize:int,numToWin:int)
++attachGUI(_GUI:Connect4GUI):void
++attachBoard(_board:Connect4Board):void
++rowSelection(xPos:int,isPlayer1:boolean):int
++winner(type:int,i:int,j:int,isPlayer1:boolean):void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>260</y>
+      <w>380</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Connect4Board
+--
+-board:Connect4Piece[][]
+-winLength:int
+-presenter:Connect4Presenter
+--
++&lt;&lt;constructor&gt;&gt;Connect4Board(boardSize:int,numToWin:int)
++getBoardSize():int
++addToColumn(columnNumber:int,isPlay1:boolean):int
++hasWinner():void
+-checkPiece(i:int,j:int,player:boolean):void
+-checkRow(i:int,j:int,player:boolean):int
+-checkCol(i:int,j:int,player:boolean):int
+-checkUpRight(i:int,j:int,player:boolean):int
+-checkUpLeft(i:int,j:int,player:boolean):int
++attach(present:Connect4Presenter):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>710</y>
+      <w>410</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>GUIGameGrid
+--
+--
++&lt;&lt;constructor&gt;&gt;GUIGameGrid(x:int,y:int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>350</y>
+      <w>410</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>GUIGamePiece
+--
+-moveToX:int
+-moveToY:int
+-speed:int
+-gravity:int
+-yVel:int
+-isBlue:boolean
+--
++&lt;&lt;constructor&gt;&gt;GUIGamePiece(_isBlue:boolean,x:int,y:int)
++getIsAnimating():boolean
++MoveToLocation(x:int,y:int):void
++draw():boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>440</y>
+      <w>150</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>590</y>
+      <w>150</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>220</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>130</y>
+      <w>850</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;830.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>500</y>
+      <w>50</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..n</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>220</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+</diagram>
