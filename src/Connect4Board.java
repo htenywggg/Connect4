@@ -67,7 +67,11 @@ public class Connect4Board {
    by diagonal. If there is a winning sequence, it will invoke the winner() in
    presenter.
    
-   @param i 
+   @param i row position of the board
+   
+   @param j column position of the board
+   
+   @param player true if player 1, false if player 2
    */
    private void checkPiece(int i, int j, boolean player) 
    {
