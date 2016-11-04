@@ -45,7 +45,8 @@ public class Connect4Board {
    }
 
    /**
-   
+   Calls checkPiece() for each non-empty position on the board, determining 
+   whether or not there is a winning sequence.
    */
    public void hasWinner()
    {
@@ -61,67 +62,143 @@ public class Connect4Board {
       }
    }
 
+   /**
+   Checks to see if there is a winning sequence (either by row, by column, or
+   by diagonal. If there is a winning sequence, it will invoke the winner() in
+   presenter.
+   
+   @param i 
+   */
    private void checkPiece(int i, int j, boolean player) 
    {
-      if(i<board.length&& j<board.length && i>=0 &&j>=0)
+      if(i < board.length && j < board.length && i >= 0 && j >= 0)
       {
-         if(checkRow(i,j,player)>=winLength)
+         if(checkRow(i, j, player) >= winLength)
          {
             presenter.winner(0, i, j, player);
          }
-         if( checkCol(i,j,player)>=winLength)
+         else if(checkCol(i, j, player) >= winLength)
          {
             presenter.winner(1, i, j, player);
          }
-         if( checkUpRight(i,j,player)>=winLength)
+         else if(checkUpRight(i, j, player) >= winLength)
          {
             presenter.winner(2, i, j, player);
          }
-         if( checkUpLeft(i,j,player)>=winLength){
+         else if(checkUpLeft(i, j, player) >= winLength)
+         {
             presenter.winner(3, i, j, player);
 
-			}
-		}		
-	}
+         }
+      }		
+   }
 
-	private int checkRow(int i, int j, boolean player) {
-		if(i<board.length&& j<board.length&&i>=0 &&j>=0){
-			if(board[i][j]!=null && (board[i][j].isP1() ==player)){
-				return checkRow(i,j+1,player)+1;
-			}
-		}
-		return 0;
-		
-	}
-	private int checkCol(int i, int j, boolean player) {
-		if(i<board.length&& j<board.length&& i>=0 &&j>=0){
-			if(board[i][j]!=null&& board[i][j].isP1()==player){
-				return checkCol(i+1,j,player)+1;
-			}
-		}
-		return 0;
-		
-	}
-	private int checkUpRight(int i, int j, boolean player){
-		if(i<board.length&& j<board.length&&i>=0 &&j>=0){
-			if(board[i][j]!=null&& board[i][j].isP1()==player){
-				return checkUpRight(i+1,j+1,player)+1;
-			}
-		}
-		return 0;
-	}
-	private int checkUpLeft(int i, int j, boolean player){
-		if(i<board.length&& j<board.length&& i>=0 &&j>=0){
-			if(board[i][j]!=null&& board[i][j].isP1()==player){
-				return checkUpLeft(i-1,j+1,player)+1;
-			}
-		}
-		return 0;
-	}
+   /**
+   By using recursion, it calculates the number of one player's pieces in a 
+   given row i, and returns it.
+   
+   @param i row position of the board
+   
+   @param j column position of the board
+   
+   @param player true if player 1, false if player 2
+   
+   @return number of the given player's pieces that are in a row sequence
+   */
+   private int checkRow(int i, int j, boolean player) 
+   {
+      if(i < board.length && j < board.length && i >= 0 && j >= 0)
+      {
+         if(board[i][j] != null && (board[i][j].isP1() == player))
+         {
+            return checkRow(i, j + 1, player) + 1;
+         }
+      }
+      return 0;	
+   }
 
-	public void attach(Connect4Presenter present) {
-		presenter = present;
-		
-	}
+   /**
+   By using recursion, it calculates the number of one player's pieces in a 
+   given column j, and returns it.
+   
+   @param i row position of the board
+   
+   @param j column position of the board
+   
+   @param player true if player 1, false if player 2
+   
+   @return number of the given player's pieces that are in a column sequence
+   */
+   private int checkCol(int i, int j, boolean player) 
+   {
+      if(i < board.length && j < board.length && i >= 0 && j >= 0)
+      {
+         if(board[i][j] != null && board[i][j].isP1() == player)
+         {
+            return checkCol(i + 1, j, player) + 1;
+         }
+      }
+      return 0;		
+   }
+
+   /**
+   By using recursion, it calculates the number of one player's pieces in a 
+   right diagonal, and returns it.
+   
+   @param i row position of the board
+   
+   @param j column position of the board
+   
+   @param player true if player 1, false if player 2
+   
+   @return number of the given player's pieces that are in a right diagonal 
+   sequence
+   */
+   private int checkUpRight(int i, int j, boolean player)
+   {
+      if(i < board.length && j < board.length && i >= 0 && j >= 0)
+      {
+         if(board[i][j] != null && board[i][j].isP1() == player)
+         {
+            return checkUpRight(i + 1, j + 1, player) + 1;
+         }
+      }
+      return 0;
+   }
+   
+   /**
+   By using recursion, it calculates the number of one player's pieces in a 
+   left diagonal, and returns it.
+   
+   @param i row position of the board
+   
+   @param j column position of the board
+   
+   @param player true if player 1, false if player 2
+   
+   @return number of the given player's pieces that are in a left diagonal
+   sequence
+   */
+   private int checkUpLeft(int i, int j, boolean player)
+   {
+      if(i < board.length && j < board.length && i >= 0 && j >= 0)
+      {
+         if(board[i][j] != null && board[i][j].isP1() == player)
+         {
+            return checkUpLeft(i - 1, j + 1, player) + 1;
+         }
+      }
+      return 0;
+   }
+
+   /**
+    Attaches the presenter to this model
+    
+    @param present presenter to be attached
+    */
+   public void attach(Connect4Presenter present) 
+   {
+      presenter = present;
+   }
 	
 }

@@ -1,4 +1,3 @@
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -21,60 +20,57 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Connect4GUI extends Application {
-
-	private static int boardSize;
-	private static int numToWin;
-	int bufferHeight = 100;
-	int boardImageWidth = 100;
-	int chipImageWidth = 60;
-	int gridSize;
-	int sceneWidth;
-	int sceneHeight;
-	AnimationTimer timer;
-	ArrayList<GUIGamePiece> gamePieces;
-	ArrayList<GUIGameGrid> gameGrid;
-	Pane dynamicMembers;
-	Connect4Presenter presenter;
-	boolean isPlayer1 =true;
-	boolean animating = false;
-	boolean wasAnimating= false;
-	boolean gameOver = false;
-	StackPane winPane;
+   private static int boardSize;
+   private static int numToWin;
+   int bufferHeight = 100;
+   int boardImageWidth = 100;
+   int chipImageWidth = 60;
+   int gridSize;
+   int sceneWidth;
+   int sceneHeight;
+   AnimationTimer timer;
+   ArrayList<GUIGamePiece> gamePieces;
+   ArrayList<GUIGameGrid> gameGrid;
+   Pane dynamicMembers;
+   Connect4Presenter presenter;
+   boolean isPlayer1 = true;
+   boolean animating = false;
+   boolean wasAnimating = false;
+   boolean gameOver = false;
+   StackPane winPane;
         
-	public void init(){
-		gridSize = boardSize;
+   public void init()
+   {
+      gridSize = boardSize;
 		
-		Connect4Board board = new Connect4Board(boardSize, numToWin);
+      Connect4Board board = new Connect4Board(boardSize, numToWin);
+      Connect4Presenter present  = new Connect4Presenter(boardSize, numToWin);
+		
+      board.attach(present);
+      attachPresenter(present);
+	
+      present.attachBoard(board);
+      present.attachGUI(this);
+      
+      gamePieces = new ArrayList<GUIGamePiece>();
+      sceneHeight = boardImageWidth*gridSize+ bufferHeight;
+      sceneWidth = boardImageWidth*boardSize;	
+   }
 
-		Connect4Presenter present  = new Connect4Presenter(boardSize, numToWin);
-		
-		board.attach(present);
-		attachPresenter(present);
+   void attachPresenter(Connect4Presenter _presenter)
+   {
+      presenter = _presenter;	
+   }
+   
+   public void Win(int i, int j, boolean _isPlayer1)
+   {
+      gameOver = true;
+      isPlayer1 = _isPlayer1;
+   }
 	
-		present.attachBoard(board);
-		present.attachGUI(this);
-		
-		gamePieces = new ArrayList<GUIGamePiece>();
-		sceneHeight = boardImageWidth*gridSize+ bufferHeight;
-		sceneWidth = boardImageWidth*boardSize;
-		
-	}
-	void attachPresenter(Connect4Presenter _presenter){
-		presenter = _presenter;
-		
-		
-	}
-	public void Win(int i, int j, boolean _isPlayer1){
-		gameOver = true;
-		isPlayer1 = _isPlayer1;
-	}
-	
-	
-	
-	
-	public void start(Stage stage){
-        
-		BorderPane root = new BorderPane();
+   public void start(Stage stage)
+   {     
+      BorderPane root = new BorderPane();
 
 		 // Where all they gamePieces go
         dynamicMembers = new Pane();
