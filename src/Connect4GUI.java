@@ -108,8 +108,8 @@ public class Connect4GUI extends Application {
          }
       });
       
-      hbox.getChildren().addAll(resetButton);
-      root.setTop(hbox);
+      //hbox.getChildren().addAll(resetButton);
+      //root.setTop(hbox);
       
       // Where all they gamePieces go
       dynamicMembers = new Pane();
