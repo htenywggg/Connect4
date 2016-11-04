@@ -4,14 +4,17 @@ import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -22,22 +25,22 @@ import javafx.stage.Stage;
 public class Connect4GUI extends Application {
    private static int boardSize;
    private static int numToWin;
-   int bufferHeight = 100;
-   int boardImageWidth = 100;
-   int chipImageWidth = 60;
-   int gridSize;
-   int sceneWidth;
-   int sceneHeight;
-   AnimationTimer timer;
-   ArrayList<GUIGamePiece> gamePieces;
-   ArrayList<GUIGameGrid> gameGrid;
-   Pane dynamicMembers;
-   Connect4Presenter presenter;
-   boolean isPlayer1 = true;
-   boolean animating = false;
-   boolean wasAnimating = false;
-   boolean gameOver = false;
-   StackPane winPane;
+   private int bufferHeight = 100;
+   private int boardImageWidth = 100;
+   private int chipImageWidth = 60;
+   private int gridSize;
+   private int sceneWidth;
+   private int sceneHeight;
+   private AnimationTimer timer;
+   private ArrayList<GUIGamePiece> gamePieces;
+   private ArrayList<GUIGameGrid> gameGrid;
+   private Pane dynamicMembers;
+   private Connect4Presenter presenter;
+   private boolean isPlayer1 = true;
+   private boolean animating = false;
+   private boolean wasAnimating = false;
+   private boolean gameOver = false;
+   private StackPane winPane;
    
    /**
    Defines the Connect4Board and Connect4Presenter with the proper size and the
@@ -68,7 +71,7 @@ public class Connect4GUI extends Application {
     
     @param _presenter Presenter to be attached to the GUI.
     */
-   void attachPresenter(Connect4Presenter _presenter)
+   public void attachPresenter(Connect4Presenter _presenter)
    {
       presenter = _presenter;	
    }
@@ -93,6 +96,21 @@ public class Connect4GUI extends Application {
    public void start(Stage stage)
    {     
       BorderPane root = new BorderPane();
+      
+      HBox hbox = new HBox();
+      Button resetButton = new Button("Reset");
+      
+      resetButton.setOnAction(new EventHandler<ActionEvent>() {
+         @Override
+         public void handle(ActionEvent e)
+         {
+            resetBoard();
+         }
+      });
+      
+      hbox.getChildren().addAll(resetButton);
+      root.setTop(hbox);
+      
       // Where all they gamePieces go
       dynamicMembers = new Pane();
         
@@ -154,6 +172,14 @@ public class Connect4GUI extends Application {
       staticMembers.getChildren().addAll(gameGrid);	
    }
 	
+   private void resetBoard()
+   {
+      for(int i = 0; i < gamePieces.size(); i++)
+      {
+         //gamePieces.get(i).MoveToLocation(gamePieces.get(i).moveToX, boardSize*100+8);
+      }
+   }
+   
    /**
     
     */

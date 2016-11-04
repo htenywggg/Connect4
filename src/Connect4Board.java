@@ -17,6 +17,11 @@ public class Connect4Board {
       winLength = numToWin;
       board = new Connect4Piece[boardSize][boardSize];	
    }
+   
+   public int getBoardSize()
+   {
+      return board.length;
+   }
 
    /**
    Adds a Connect4Piece to the board in a certain column by iterating through 
@@ -27,7 +32,7 @@ public class Connect4Board {
    
    @param isPlay1 true if the piece is for player 1, false if for player 2
    
-   @return position of the new Connect4Piece from the top (as opposed to the bottom) *************comeback
+   @return position of the new Connect4Piece
    */
    public int addToColumn(int columnNumber, boolean isPlay1)
    {

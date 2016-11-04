@@ -2,13 +2,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class GUIGamePiece extends ImageView {
-   int moveToX;
-   int moveToY;
-   int speed = 4;
-   int gravity = 3;
-   int yVel;
-   boolean isBlue;
+   private int moveToX;
+   private int moveToY;
+   private int speed = 4;
+   private int gravity = 3;
+   private int yVel;
+   private boolean isBlue;
 	
+   /**
+    Constructor for GUIGamePiece, creates a game piece with the appropriate 
+    color and position on the board.
+    @param _isBlue true if blue piece, false if green piece
+    @param x x-position of piece
+    @param y y-position of piece
+    */
    public GUIGamePiece(boolean _isBlue, int x, int y)
    {
       super();
@@ -27,13 +34,18 @@ public class GUIGamePiece extends ImageView {
       this.setY(y);	
    }
 	
-   boolean getIsAnimating()
+   /**
+    Checks if the piece is 
+    * @return 
+    */
+   public boolean getIsAnimating()
    {
-      return yVel==0;
+      return yVel == 0;
    }
 
    public void MoveToLocation(int x, int y)
    {
+      System.out.println(x + " " + y);
       yVel = gravity;
       moveToX = x;
       moveToY = y;
@@ -42,7 +54,7 @@ public class GUIGamePiece extends ImageView {
          moveToY += 1;
       }
    }
-	
+   
    public boolean draw()
    {
       //this method takes care of the animation that moves the piece to the right then drops it
