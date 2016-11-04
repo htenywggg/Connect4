@@ -40,6 +40,7 @@ public class Connect4GUI extends Application {
 	boolean wasAnimating= false;
 	boolean gameOver = false;
 	StackPane winPane;
+        
 	public void init(){
 		gridSize = boardSize;
 		
